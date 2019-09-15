@@ -9,14 +9,12 @@ def simulatedAnnealing(problem, schedule):
         T = schedule(t)
         if problem.value(current) == 0:
             return current
-        next = problem.randomNearNeighbour()
-        dif = problem.value(next[0]) - problem.value(current)
-        print(problem.value(current))
-        print(current)
+        next = problem.randomNearNeighbour(current)
+        dif = problem.value(next) - problem.value(current)
         if dif > 0:
-            current = next[0]
+            current = next
         else:
             prob = random.uniform(0, 1)
             if prob < math.exp(dif/T):
-                current = next[0]
-        t += 0.1
+                current = next
+        t += 1
